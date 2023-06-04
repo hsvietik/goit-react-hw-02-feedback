@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Container } from './App.styled';
-import { Title } from './Title/Title';
-import { StatisticButtons } from './StatisticButtons/StatisticButtons';
-import { StatisticResults } from './StatisticResults/StatisticResults';
+import { Section } from './Section/Section';
+import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
+import { Statistics } from './Statistics/Statistics';
 
 export class App extends Component {
   state = {
@@ -10,7 +9,7 @@ export class App extends Component {
     neutral: 0,
     bad: 0,
   };
-  statisticsCounter = item => {
+  onLeaveFeedback = item => {
     this.setState(prevState => ({
       [item]: prevState[item] + 1,
     }));
@@ -34,18 +33,18 @@ export class App extends Component {
   };
   render() {
     return (
-      <Container>
-        <Title />
-        <StatisticButtons
-          buttons={Object.keys(this.state)}
-          statisticsCounter={this.statisticsCounter}
+      <Section title="Please leave feedback">
+        <FeedbackOptions
+          options={Object.keys(this.state)}
+          onLeaveFeedback={this.onLeaveFeedback}
         />
-        <StatisticResults
+
+        <Statistics
           statistics={this.state}
-          countTotalFeedback={this.countTotalFeedback}
-          countPositiveFeedbackPercentage={this.countPositiveFeedbackPercentage}
+          total={this.countTotalFeedback()}
+          positivePercentage={this.countPositiveFeedbackPercentage()}
         />
-      </Container>
+      </Section>
     );
   }
 }

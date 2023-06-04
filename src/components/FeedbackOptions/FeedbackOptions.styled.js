@@ -10,5 +10,11 @@ export const StyledButton = styled.button`
   cursor: pointer;
   border-radius: 6px;
   background-color: white;
+  font-size: 20px;
+  line-height: 1.5;
   text-transform: capitalize;
+  &:hover,
+  &:focus {
+    background-color: yellow;
+  }
 `;
